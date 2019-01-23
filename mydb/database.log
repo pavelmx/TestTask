@@ -1,0 +1,26 @@
+/*C12*/SET SCHEMA PUBLIC
+alter table role drop constraint UK_epk9im9l9q67xmwi4hbed25do
+alter table role add constraint UK_epk9im9l9q67xmwi4hbed25do unique (name)
+alter table user drop constraint UKsb8bbouer5wak8vyiiy4pf2bx
+alter table user add constraint UKsb8bbouer5wak8vyiiy4pf2bx unique (username)
+alter table user drop constraint UKob8kqyqqgmefl0aco34akdtpe
+alter table user add constraint UKob8kqyqqgmefl0aco34akdtpe unique (email)
+DISCONNECT
+/*C13*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C14*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C15*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C16*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C17*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C18*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C19*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C20*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C21*/SET SCHEMA PUBLIC
+DISCONNECT
