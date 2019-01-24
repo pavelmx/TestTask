@@ -37,11 +37,11 @@ public class Role {
         this.id = id;
     }
 
-    public KindOfRole getKind() {
+    public KindOfRole getName() {
         return name;
     }
 
-    public void setKind(KindOfRole kind) {
+    public void setName(KindOfRole kind) {
         this.name = kind;
     }
 }

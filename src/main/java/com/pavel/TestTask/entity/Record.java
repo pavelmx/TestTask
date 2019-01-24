@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pavel.TestTask.entity.auth.User;
 
 @Entity
-@Table(name = "record")
+@Table(name = "myrecord")
 public class Record {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

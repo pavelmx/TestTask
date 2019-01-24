@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
 
-	@Query("SELECT rec FROM Record rec where rec.user.id = :id")
-	List<Record> findAllByUserId(@Param("id_user") Long id);
+	@Query("SELECT rec FROM Record rec WHERE rec.user.id = :id")
+	List<Record> findAllByUserId(@Param("id") Long id);
 }

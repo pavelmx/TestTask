@@ -15,7 +15,7 @@ import com.pavel.TestTask.repository.RecordRepository;
 import com.pavel.TestTask.repository.UserRepository;
 
 @Service
-public class RecordServiseImpl {
+public class RecordServiseImpl implements RecordService{
 
 	@Autowired
 	RecordRepository recordRepo;
