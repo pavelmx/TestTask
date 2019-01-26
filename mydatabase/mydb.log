@@ -1,10 +1,7 @@
-/*C22*/SET SCHEMA PUBLIC
+/*C3*/SET SCHEMA PUBLIC
 alter table myuser drop constraint UK6pkl0r3rdvngloet9vuqpjn2w
 alter table myuser add constraint UK6pkl0r3rdvngloet9vuqpjn2w unique (username)
 alter table myuser drop constraint UKqqt75bgh5hsuuk0vyoy3mjdys
 alter table myuser add constraint UKqqt75bgh5hsuuk0vyoy3mjdys unique (email)
 alter table role drop constraint UK_epk9im9l9q67xmwi4hbed25do
 alter table role add constraint UK_epk9im9l9q67xmwi4hbed25do unique (name)
-DELETE FROM MYRECORD WHERE ID=4
-INSERT INTO MYRECORD VALUES(4,'2019-01-28 02:00:00.000000',3.549999952316284E0,0.550000011920929E0,1)
-COMMIT
