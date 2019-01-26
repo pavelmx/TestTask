@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pavel.TestTask.entity.Record;
+import com.pavel.TestTask.entity.Report;
 import com.pavel.TestTask.service.RecordService;
+
 
 
 
@@ -25,6 +27,11 @@ public class RecordController {
 
 	@Autowired
 	RecordService recordService;
+	
+	@GetMapping("report/{id}")
+	public ResponseEntity<List<Report>> getReportByUserId(@PathVariable("id") Long id) {
+		return new ResponseEntity<List<Report>>(recordService.getReport(id), HttpStatus.OK);
+	}
 	
 	@GetMapping("record/{id}")
 	public ResponseEntity<Record> getRecordById(@PathVariable("id") Long id) {
@@ -44,20 +51,20 @@ public class RecordController {
 		return new ResponseEntity<List<Record>>(list, HttpStatus.OK);
 	}
 	
-	@PostMapping("record")
+	@PostMapping("record/{id}")
 	public ResponseEntity<Record> addRecordByUserId(@PathVariable("id") Long id, @RequestBody Record a) {
 		Record rec = recordService.addRecord(id, a);
 		return new ResponseEntity<Record>(rec, HttpStatus.CREATED);
 	}
 
-	@PutMapping("record")
+	@PutMapping("record/{id}")
 	public ResponseEntity<Record> updateRecordByUserId(@PathVariable("id") Long id, @RequestBody Record a) {
 		Record rec = recordService.updateRecord(id, a);
 		return new ResponseEntity<Record>(rec, HttpStatus.OK);
 	}
 
 	@DeleteMapping("record/{id}")
-	public ResponseEntity<Void> deleteRecord(@PathVariable("id") Long id) {
+	public ResponseEntity<Void> deleteRecordById(@PathVariable("id") Long id) {
 		recordService.deleteRecord(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

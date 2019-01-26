@@ -1,7 +1,6 @@
 package com.pavel.TestTask.controller;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -70,12 +69,12 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody Register reg) {
 		if (userRepository.existsByUsername(reg.getUsername())) {
-			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+			return new ResponseEntity<>(new ResponseMessage("Username is already taken!"),
 					HttpStatus.BAD_REQUEST);
 		}
 
 		if (userRepository.existsByEmail(reg.getEmail())) {
-			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+			return new ResponseEntity<>(new ResponseMessage("Email is already in use!"),
 					HttpStatus.BAD_REQUEST);
 		}
 
