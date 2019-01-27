@@ -1,0 +1,29 @@
+/*C12*/SET SCHEMA PUBLIC
+alter table myuser drop constraint UK6pkl0r3rdvngloet9vuqpjn2w
+alter table myuser add constraint UK6pkl0r3rdvngloet9vuqpjn2w unique (username)
+alter table myuser drop constraint UKqqt75bgh5hsuuk0vyoy3mjdys
+alter table myuser add constraint UKqqt75bgh5hsuuk0vyoy3mjdys unique (email)
+alter table role drop constraint UK_epk9im9l9q67xmwi4hbed25do
+alter table role add constraint UK_epk9im9l9q67xmwi4hbed25do unique (name)
+INSERT INTO MYUSER VALUES(3,'user3@email','ivan ivanov','$2a$10$juc3dTGAH3DAbsOIDnCdo.qA/Tq27yoEeaTKmS0szKJoUZ/k9BEzK','user3')
+INSERT INTO KIND_OF_ROLE VALUES(3,2)
+COMMIT
+DISCONNECT
+/*C13*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C14*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C15*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C16*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C17*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C18*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C19*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C20*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C21*/SET SCHEMA PUBLIC
+DISCONNECT
