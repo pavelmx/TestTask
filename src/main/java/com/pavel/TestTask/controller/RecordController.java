@@ -52,14 +52,14 @@ public class RecordController {
 	}
 	
 	@PostMapping("record/{id}")
-	public ResponseEntity<Record> addRecordByUserId(@PathVariable("id") Long id, @RequestBody Record a) {
-		Record rec = recordService.addRecord(id, a);
+	public ResponseEntity<Record> addRecordByUserId(@PathVariable("id") Long id, @RequestBody Record r) {
+		Record rec = recordService.addRecord(id, r);
 		return new ResponseEntity<Record>(rec, HttpStatus.CREATED);
 	}
 
 	@PutMapping("record/{id}")
-	public ResponseEntity<Record> updateRecordByUserId(@PathVariable("id") Long id, @RequestBody Record a) {
-		Record rec = recordService.updateRecord(id, a);
+	public ResponseEntity<Record> updateRecordByUserId(@PathVariable("id") Long id, @RequestBody Record r) {
+		Record rec = recordService.updateRecord(id, r);
 		return new ResponseEntity<Record>(rec, HttpStatus.OK);
 	}
 
