@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,6 +27,7 @@ import com.pavel.TestTask.security.Register;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource("/applicationtest.properties")
+@Sql(value = { "/after.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 public class TestAuthController {
 
 	@Autowired
@@ -43,9 +45,9 @@ public class TestAuthController {
 	@Before
 	public void createUser() {				
 		Register reg = new Register();
-		reg.setUsername("user");
+		reg.setUsername("newuser");
 		reg.setPassword("123456");
-		reg.setEmail("user@email");
+		reg.setEmail("newuser@email");
 		reg.setName("ivan ivanov");
 		authController.registerUser(reg);
 	}
@@ -53,13 +55,13 @@ public class TestAuthController {
 	@Test
 	public void testLogin() throws Exception {
 		Login login = new Login();
-		login.setUsername("user");
+		login.setUsername("newuser");
 		login.setPassword("123456");
 
 		mockMvc.perform(post("/auth/login").content(objectMapper.writeValueAsString(login))
 				.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.tokenType").value("Bearer"))
-				.andExpect(jsonPath("$.accessToken").isNotEmpty());
+				.andExpect(jsonPath("$.accessToken").isNotEmpty());		
 	}
 	
 	@Test
@@ -75,10 +77,10 @@ public class TestAuthController {
 				.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk());		
 	}
 	
-	@After
+	/*@After
 	public void clear() {		
 		userRepository.deleteAll();
-	}
+	}*/
 	
 }
 

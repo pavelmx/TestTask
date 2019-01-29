@@ -17,6 +17,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,6 +36,7 @@ import com.pavel.TestTask.service.RecordService;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource("/applicationtest.properties")
+@Sql(value = { "/after.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 public class TestRecordController {
 	
 	@Autowired
@@ -137,13 +140,5 @@ public class TestRecordController {
 				.contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isOk());
 	}
 	
-	/*@After
-	public void clear() {
-		List<Record> lst = recordRepository.findAll();	
-		for(Record r: lst)
-			recordRepository.delete(r);
-			
-		//userRepository.deleteAll();	
-	}*/
 	
 }
