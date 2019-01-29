@@ -19,8 +19,6 @@ import com.pavel.TestTask.entity.Report;
 import com.pavel.TestTask.service.RecordService;
 
 
-
-
 @RestController
 @CrossOrigin(origins = "*")
 public class RecordController {
@@ -68,6 +66,4 @@ public class RecordController {
 		recordService.deleteRecord(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
-	
 }

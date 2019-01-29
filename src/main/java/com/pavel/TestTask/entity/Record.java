@@ -27,14 +27,15 @@ import com.pavel.TestTask.entity.auth.User;
 				@ColumnResult(name = "total_distance", type = Float.class) }) })
 
 @Entity
-@NamedNativeQuery(name="Record.getReport",query="SELECT DATE_SUB(date, (DAYOFWEEK(date)-2) day ) AS begin_week, " + 
-					"DATE_ADD(date, (8-DAYOFWEEK(date)) day ) AS end_week, " + 
-					"SUM(distance/time)/COUNT(*) AS av_speed, " + 
-					"SUM(time)/COUNT(time) AS av_time, " + 
-					"SUM(distance) AS total_distance" + 
-					" FROM myrecord WHERE id_user = :id GROUP BY WEEK(DATE_ADD(date, 1 DAY)), begin_week, end_week",
-					resultSetMapping = "Report",
-					resultClass=Report.class)
+@NamedNativeQuery(name="Record.getReport",
+		query="SELECT DATE_SUB(date, (DAYOFWEEK(DATE_SUB(date, 1 DAY))-2) day ) AS begin_week, " + 
+		"DATE_ADD(date, (8-DAYOFWEEK(DATE_SUB(date, 1 DAY))) day ) AS end_week, " + 
+		"SUM(distance/time)/COUNT(*) AS av_speed, " + 
+		"SUM(time)/COUNT(time) AS av_time, " + 
+		"SUM(distance) AS total_distance" + 
+		" FROM myrecord WHERE id_user = :id GROUP BY WEEK(date), begin_week, end_week",
+		resultSetMapping = "Report",
+		resultClass=Report.class)
 @Table(name = "myrecord")
 public class Record {
 	@Id

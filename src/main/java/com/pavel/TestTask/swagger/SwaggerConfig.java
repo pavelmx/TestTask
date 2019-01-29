@@ -26,7 +26,7 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket apiDocket() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.pavel.TestTask"))
 				.paths(PathSelectors.any()).build().securitySchemes(Arrays.asList(apiKey()))
 				.securitySchemes(Lists.newArrayList(apiKey())).securityContexts(Arrays.asList(securityContext()));
 	}

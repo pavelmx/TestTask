@@ -4,6 +4,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pavel.TestTask.controller.AuthController;
 import com.pavel.TestTask.repository.UserRepository;
 import com.pavel.TestTask.security.Login;
 import com.pavel.TestTask.security.Register;
@@ -34,11 +37,23 @@ public class TestAuthController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private AuthController authController;
+	
+	@Before
+	public void createUser() {				
+		Register reg = new Register();
+		reg.setUsername("user");
+		reg.setPassword("123456");
+		reg.setEmail("user@email");
+		reg.setName("ivan ivanov");
+		authController.registerUser(reg);
+	}
 	
 	@Test
 	public void testLogin() throws Exception {
 		Login login = new Login();
-		login.setUsername("user2");
+		login.setUsername("user");
 		login.setPassword("123456");
 
 		mockMvc.perform(post("/auth/login").content(objectMapper.writeValueAsString(login))
@@ -50,13 +65,20 @@ public class TestAuthController {
 	@Test
 	public void testRegister() throws Exception {
 		Register reg = new Register();
-		reg.setUsername("user3");
+		reg.setUsername("vasya2");
 		reg.setPassword("123456");
-		reg.setEmail("user3@email");
-		reg.setName("ivan ivanov");
+		reg.setEmail("vasya2@email");
+		reg.setName("vasya2");
+		
 
 		mockMvc.perform(post("/auth/register").content(objectMapper.writeValueAsString(reg))
 				.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk());		
 	}
+	
+	@After
+	public void clear() {		
+		userRepository.deleteAll();
+	}
+	
 }
 
